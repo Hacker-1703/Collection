@@ -3,7 +3,6 @@ public class Main {
         Date date1 = new Date();
         date1.addDays(738880);
         date1.showDate();
-        date1.removeDays(730);
-        date1.showDate();
+        System.out.println(date1.translationInDays());
     }
 }

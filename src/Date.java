@@ -157,7 +157,10 @@ public class Date {
 
     public void removeMonths(int count) throws Exception {
         setMonths("remove", count);
-        if (months < 1) {
+        while (true) {
+            if (months > 0) {
+                break;
+            }
             setMonths("add", 12);
             removeYears(1);
         }
@@ -169,6 +172,40 @@ public class Date {
 
     public void showDate() {
         System.out.println(getDays() + "." + getMonths() + "." + getYears());
+    }
+
+    public int translationInDays() {
+        int count = 0;
+        int months2 = this.months;
+        int years2 = this.years;
+        count += this.days;
+        while (true) {
+            if (months2 == 0) {
+                months2 += 12;
+                years2 -= 1;
+            }
+            if (years2 == 1) {
+                break;
+            }
+            if (months2 == 1 || months2 == 3 || months2 == 5 || months2 == 7 || months2 == 8 || months2 == 10 || months2 == 12) {
+                count += 31;
+                months2 -= 1;
+            }
+            if (months2 == 4 || months2== 6 || months2 == 9 || months2 == 11) {
+                count += 30;
+                months2 -= 1;
+            }
+            if (months2 == 2) {
+                if (years2 % 4 == 0 && (years2 % 100 == 0 ? years2 % 400 == 0 : true)) {
+                    count += 29;
+                    months2 -= 1;
+                } else {
+                    count += 28;
+                    months2 -= 1;
+                }
+            }
+        }
+        return count;
     }
 
     public void setDate(int days, int months, int years) throws Exception {
