@@ -175,34 +175,93 @@ public class Date {
     }
 
     public int translationInDays() {
-        int count = 0;
-        int months2 = this.months;
-        int years2 = this.years;
-        count += this.days;
+        int count = this.days - 1;
+        int countMonths = (this.years - 1) * 12 + (this.months - 1);
+        int countYears = this.years;
+        int currentMonth = this.months - 1;
+        if (currentMonth == 0) {
+            currentMonth = 1;
+        }
         while (true) {
-            if (months2 == 0) {
-                months2 += 12;
-                years2 -= 1;
-            }
-            if (years2 == 1) {
+            if (countMonths == 0) {
                 break;
             }
-            if (months2 == 1 || months2 == 3 || months2 == 5 || months2 == 7 || months2 == 8 || months2 == 10 || months2 == 12) {
-                count += 31;
-                months2 -= 1;
-            }
-            if (months2 == 4 || months2== 6 || months2 == 9 || months2 == 11) {
-                count += 30;
-                months2 -= 1;
-            }
-            if (months2 == 2) {
-                if (years2 % 4 == 0 && (years2 % 100 == 0 ? years2 % 400 == 0 : true)) {
-                    count += 29;
-                    months2 -= 1;
-                } else {
-                    count += 28;
-                    months2 -= 1;
-                }
+            switch (currentMonth) {
+                case 1:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 12;
+                    countYears -= 1;
+                    break;
+
+                case 2:
+                    if (countYears % 4 == 0 && (countYears % 100 == 0 ? countYears % 400 == 0 : true)) {
+                        count += 29;
+                    } else {
+                        count += 28;
+                    }
+
+
+                    countMonths -= 1;
+                    currentMonth = 1;
+                    break;
+
+                case 3:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 2;
+                    break;
+
+                case 4:
+                    count += 30;
+                    countMonths -= 1;
+                    currentMonth = 3;
+                    break;
+
+                case 5:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 4;
+                    break;
+                case 6:
+                    count += 30;
+                    countMonths -= 1;
+                    currentMonth = 5;
+                    break;
+                case 7:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 6;
+                    break;
+                case 8:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 7;
+                    break;
+
+                case 9:
+                    count += 30;
+                    countMonths -= 1;
+                    currentMonth = 8;
+                    break;
+
+                case 10:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 9;
+                    break;
+
+                case 11:
+                    count += 30;
+                    countMonths -= 1;
+                    currentMonth = 10;
+                    break;
+
+                case 12:
+                    count += 31;
+                    countMonths -= 1;
+                    currentMonth = 11;
+                    break;
             }
         }
         return count;
