@@ -174,6 +174,29 @@ public class Date {
         System.out.println(getDays() + "." + getMonths() + "." + getYears());
     }
 
+    public int dateComparisonAndOutput(Date date) {
+        if (this.translationInDays() > date.translationInDays()) {
+            System.out.println("Первая дата больше на " + (this.translationInDays() - date.translationInDays()) + " дн.");
+            return this.translationInDays() - date.translationInDays();
+        } else if (this.translationInDays() < date.translationInDays()) {
+            System.out.println("Вторая дата больше на " + (date.translationInDays() - this.translationInDays()) + " дн.");
+            return date.translationInDays() - this.translationInDays();
+        } else {
+            System.out.println("Они одинаковые!");
+            return 0;
+        }
+    }
+
+    public int comparisonOfDatesWithoutOutput(Date date) {
+        if (this.translationInDays() > date.translationInDays()) {
+            return this.translationInDays() - date.translationInDays();
+        } else if (this.translationInDays() < date.translationInDays()) {
+            return date.translationInDays() - this.translationInDays();
+        } else {
+            return 0;
+        }
+    }
+
     public int translationInDays() {
         int count = this.days - 1;
         int countMonths = (this.years - 1) * 12 + (this.months - 1);
