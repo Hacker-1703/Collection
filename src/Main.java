@@ -1,25 +1,23 @@
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
-    public static <T> T[] merge(Class<T> clazz, T[] a, T[] b) {
-        T[] newArray;
-        newArray = (T[]) Array.newInstance(clazz, a.length + b.length);
-        for (int i = 0; i < a.length; i++) {
-            newArray[i] = a[i];
-        }
-        for (int i = 0; i < b.length; i++) {
-            newArray[i + a.length] = b[i];
-        }
-
-        return newArray;
-    }
-
-    public static void main(String[] args) {
-        String[] a = {"Я", "хочу"};
-        String[] b = {"жестко", "пукнуть"};
-        String[] c = merge(String.class, a, b);
-        for (String i : c){
-            System.out.println(i);
+    public static void main(String[] args) throws Exception {
+        try {
+            Scanner scanner = new Scanner(new File("hz.txt"));
+            int i = 1;
+            while (scanner.hasNextLine()) {
+                System.out.print(i + ": ");
+                System.out.println(scanner.nextLine());
+                i++;
+                scanner.close();
+            }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Файл не найден!");
+        } catch (Exception e) {
+            throw new Exception("Что - то пошло не так");
         }
     }
 }
